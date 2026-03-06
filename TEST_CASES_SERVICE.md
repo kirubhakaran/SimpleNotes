@@ -111,7 +111,7 @@ Unit tests for `NoteService`, `SearchService`, and `ExportService`.
 | **Requirement**| FR-2.5                                                |
 | **Description**| Fetching all notes returns every note regardless of folder |
 | **Steps**      | 1. Create 3 notes in Folder A, 2 unfiled              |
-|                | 2. Call `NoteService.fetchAllNotes(context:)`         |
+|                | 2. Call `NoteService.fetchNotes(in: nil, context:)`   |
 | **Expected**   | Returns exactly 5 notes                               |
 | **Priority**   | Must                                                  |
 
@@ -135,6 +135,88 @@ Unit tests for `NoteService`, `SearchService`, and `ExportService`.
 | **Description**| Pinned notes appear before unpinned in fetch results  |
 | **Steps**      | 1. Create 2 unpinned notes, then 1 pinned note (oldest) |
 | **Expected**   | Pinned note is first in results                       |
+| **Priority**   | Should                                                |
+
+### TC-S1.12: Toggle Pin - Does NOT Update modifiedAt
+
+| Field          | Detail                                                |
+|----------------|-------------------------------------------------------|
+| **ID**         | TC-S1.12                                              |
+| **Requirement**| CONTRACTS.md (togglePin)                              |
+| **Description**| Pinning a note does not change modifiedAt             |
+| **Steps**      | 1. Create note, record `modifiedAt`                   |
+|                | 2. Call `NoteService.togglePin(note)`                 |
+| **Expected**   | `note.isPinned == true`, `modifiedAt` unchanged       |
+| **Priority**   | Must                                                  |
+
+### TC-S1.13: Move Note - Does NOT Update modifiedAt
+
+| Field          | Detail                                                |
+|----------------|-------------------------------------------------------|
+| **ID**         | TC-S1.13                                              |
+| **Requirement**| CONTRACTS.md (moveNote)                               |
+| **Description**| Moving a note to a different folder does not change modifiedAt |
+| **Steps**      | 1. Create note in Folder A, record `modifiedAt`       |
+|                | 2. Call `NoteService.moveNote(note, to: folderB)`     |
+| **Expected**   | `note.folder == folderB`, `modifiedAt` unchanged      |
+| **Priority**   | Must                                                  |
+
+### TC-S1.14: Fetch Notes - Full Sort Order with Tiebreakers
+
+| Field          | Detail                                                |
+|----------------|-------------------------------------------------------|
+| **ID**         | TC-S1.14                                              |
+| **Requirement**| EDGE_CASES.md (sorting rules)                         |
+| **Description**| Notes with same modifiedAt sort by createdAt then id  |
+| **Steps**      | 1. Create 3 notes with identical modifiedAt but different createdAt |
+| **Expected**   | Sorted by createdAt descending; if createdAt also equal, by id ascending |
+| **Priority**   | Must                                                  |
+
+### TC-S1.15: Duplicate Note - Sequential Copy Numbering
+
+| Field          | Detail                                                |
+|----------------|-------------------------------------------------------|
+| **ID**         | TC-S1.15                                              |
+| **Requirement**| CONTRACTS.md (duplicate)                              |
+| **Description**| Duplicating a note multiple times produces numbered copies |
+| **Steps**      | 1. Create note "Report"                               |
+|                | 2. Duplicate → "Report (Copy)"                       |
+|                | 3. Duplicate original again → "Report (Copy 2)"      |
+| **Expected**   | Third duplicate: "Report (Copy 3)"                    |
+| **Priority**   | Should                                                |
+
+### TC-S1.16: Title Newline Stripping
+
+| Field          | Detail                                                |
+|----------------|-------------------------------------------------------|
+| **ID**         | TC-S1.16                                              |
+| **Requirement**| EDGE_CASES.md (Note Title validation)                 |
+| **Description**| Newlines in note title are stripped (title is single-line) |
+| **Steps**      | 1. Call `NoteService.update(note, title: "Line1\nLine2")` |
+| **Expected**   | `note.title == "Line1Line2"` (newlines removed)       |
+| **Priority**   | Should                                                |
+
+### TC-S1.17: Title Null Byte Stripping
+
+| Field          | Detail                                                |
+|----------------|-------------------------------------------------------|
+| **ID**         | TC-S1.17                                              |
+| **Requirement**| EDGE_CASES.md (Note Title validation)                 |
+| **Description**| Null bytes in note title are stripped                  |
+| **Steps**      | 1. Call `NoteService.update(note, title: "Hello\0World")` |
+| **Expected**   | `note.title == "HelloWorld"` (null bytes removed)     |
+| **Priority**   | Should                                                |
+
+### TC-S1.18: Folder Reorder
+
+| Field          | Detail                                                |
+|----------------|-------------------------------------------------------|
+| **ID**         | TC-S1.18                                              |
+| **Requirement**| CONTRACTS.md (FolderService.reorder)                  |
+| **Description**| Reordering folders updates displayOrder for all affected |
+| **Steps**      | 1. Create folders A(0), B(1), C(2)                    |
+|                | 2. Call `FolderService.reorder(from: 2, to: 0, context:)` |
+| **Expected**   | displayOrder: C(0), A(1), B(2)                        |
 | **Priority**   | Should                                                |
 
 ---
@@ -401,5 +483,5 @@ Unit tests for `NoteService`, `SearchService`, and `ExportService`.
 | **Description**| Notes with the same title get unique filenames        |
 | **Steps**      | 1. Create two notes both titled "Meeting Notes"       |
 |                | 2. Export all as zip                                  |
-| **Expected**   | Files named `Meeting Notes.md` and `Meeting Notes (2).md` |
+| **Expected**   | Files named `Meeting Notes.md` and `Meeting Notes (Copy).md` |
 | **Priority**   | Should                                                |

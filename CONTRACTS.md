@@ -169,6 +169,22 @@ func moveNote(_ note: Note, to folder: Folder?) throws
 | New folder | Note added to new folder's `notes` array |
 | modifiedAt | NOT updated (moving is organizational, not content edit) |
 
+### flushPendingSaves
+
+```swift
+/// Immediately saves all notes with pending debounce timers.
+/// Call on: note switch, app termination, app background.
+/// - Parameter context: The ModelContext.
+func flushPendingSaves(context: ModelContext) throws
+```
+
+| Behavior | Detail |
+|----------|--------|
+| Cancels all active debounce timers | Prevents duplicate saves |
+| Saves all dirty notes | Iterates all pending changes |
+| Thread | Must be called on main thread |
+| Failure | Throws `SimpleNotesError.saveFailed` |
+
 ---
 
 ## FolderService
@@ -243,6 +259,60 @@ func reorder(from: Int, to: Int, context: ModelContext) throws
 
 ---
 
+## TagService (Phase 6 - Could Priority)
+
+> Tags are a "Could" priority feature (FR-2.4). These contracts apply only if tags are implemented.
+
+### addTag
+
+```swift
+/// Adds a tag to a note. Silently rejects if note already has 20 tags.
+/// - Parameters:
+///   - tag: The tag to add.
+///   - note: The note to tag.
+func addTag(_ tag: Tag, to note: Note) throws
+```
+
+| Behavior | Detail |
+|----------|--------|
+| Tag limit | If `note.tags.count >= 20`, silently reject (log at info level) |
+| Duplicate | If note already has this tag, no-op |
+| modifiedAt | NOT updated (tagging is organizational) |
+
+### removeTag
+
+```swift
+/// Removes a tag from a note.
+/// - Parameters:
+///   - tag: The tag to remove.
+///   - note: The note to untag.
+func removeTag(_ tag: Tag, from note: Note)
+```
+
+### createTag
+
+```swift
+/// Creates a new tag.
+/// - Parameters:
+///   - name: Tag name. Truncated to 50 chars if longer.
+///   - color: Optional hex color string. Invalid formats stored as-is.
+///   - context: The ModelContext.
+/// - Returns: The created Tag.
+func createTag(name: String, color: String? = nil, context: ModelContext) throws -> Tag
+```
+
+### deleteTag
+
+```swift
+/// Deletes a tag. Removes associations from all notes (notes are NOT deleted).
+/// - Parameters:
+///   - tag: The tag to delete.
+///   - context: The ModelContext.
+func deleteTag(_ tag: Tag, context: ModelContext) throws
+```
+
+---
+
 ## SearchService
 
 ### search
@@ -273,6 +343,7 @@ func search(_ query: String, in folder: Folder? = nil, context: ModelContext) ->
 | Secondary | `isPinned` descending |
 | Tertiary | `modifiedAt` descending |
 | Tiebreaker | `createdAt` descending |
+| Final tiebreaker | `id` string ascending (stable sort) |
 
 ---
 

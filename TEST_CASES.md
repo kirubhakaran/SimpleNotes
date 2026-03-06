@@ -52,7 +52,7 @@ Unit tests for the Swift Data model layer (`Note`, `Folder`, `Tag`).
 | **Description**| Note title respects 500 character maximum             |
 | **Steps**      | 1. Create Note with title of 501 characters           |
 |                | 2. Attempt to save                                    |
-| **Expected**   | Title is truncated to 500 characters or validation error raised |
+| **Expected**   | Title is silently truncated to 500 characters (no error per CONTRACTS.md) |
 | **Priority**   | Should                                                |
 
 ### TC-M1.5: Note - modifiedAt Updates on Edit
@@ -151,7 +151,7 @@ Unit tests for the Swift Data model layer (`Note`, `Folder`, `Tag`).
 | **Requirement**| DATA_MODEL (100 char limit)                           |
 | **Description**| Folder name respects 100 character maximum            |
 | **Steps**      | 1. Create Folder with 101-character name              |
-| **Expected**   | Name truncated to 100 characters or validation error  |
+| **Expected**   | Name silently truncated to 100 characters (no error per CONTRACTS.md) |
 | **Priority**   | Should                                                |
 
 ### TC-M2.4: Folder - Display Order Sorting
@@ -211,7 +211,7 @@ Unit tests for the Swift Data model layer (`Note`, `Folder`, `Tag`).
 | **Requirement**| DATA_MODEL (50 char limit)                            |
 | **Description**| Tag name respects 50 character maximum                |
 | **Steps**      | 1. Create Tag with 51-character name                  |
-| **Expected**   | Name truncated to 50 characters or validation error   |
+| **Expected**   | Name silently truncated to 50 characters (no error per CONTRACTS.md) |
 | **Priority**   | Could                                                 |
 
 ---
@@ -290,7 +290,7 @@ Unit tests for the Swift Data model layer (`Note`, `Folder`, `Tag`).
 | **Description**| A note cannot have more than 20 tags                  |
 | **Steps**      | 1. Create a Note and 21 Tags                          |
 |                | 2. Attempt to assign all 21 to the note               |
-| **Expected**   | Only 20 tags allowed; 21st is rejected or error raised |
+| **Expected**   | Only 20 tags allowed; 21st silently rejected (logged at info level per EDGE_CASES.md) |
 | **Priority**   | Could                                                 |
 
 ### TC-M4.7: Note-Tag - Delete Tag Removes Association

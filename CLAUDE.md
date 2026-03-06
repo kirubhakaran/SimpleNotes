@@ -77,6 +77,8 @@ Refer to these spec files before implementing:
 - `CONTRACTS.md` - API method signatures, error types, return contracts
 - `STATE_MACHINE.md` - State transitions, post-action behavior, dialogs
 - `EDGE_CASES.md` - Validation rules, sorting tiebreakers, concurrency, constants
+- `ACCESSIBILITY.md` - VoiceOver labels, focus order, Dynamic Type, Reduced Motion
+- `LOCALIZATION.md` - String catalog, date/number formatting (all user-facing strings)
 - `TEST_STRATEGY.md` - Testing approach
 - `TEST_CASES*.md` - Specific test cases per layer
 
@@ -88,6 +90,8 @@ Refer to these spec files before implementing:
 - Search clears on folder switch; preview mode persists across note switches
 - Flush pending debounce saves before note switch or app termination
 - All sorting must include tiebreakers (see `EDGE_CASES.md` Sorting Rules)
+- Never hardcode user-facing strings; use `String(localized:)` per `LOCALIZATION.md`
+- All interactive elements must have accessibility labels per `ACCESSIBILITY.md`
 
 ## Development Workflow
 

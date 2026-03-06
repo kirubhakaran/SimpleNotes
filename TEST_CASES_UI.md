@@ -739,15 +739,168 @@ End-to-end UI tests (XCUITest), cross-layer integration tests, and performance b
 
 ---
 
+## TC-ACC2: Additional Accessibility Tests
+
+### TC-ACC2.1: VoiceOver - Folder Note Count
+
+| Field          | Detail                                                |
+|----------------|-------------------------------------------------------|
+| **ID**         | TC-ACC2.1                                             |
+| **Requirement**| ACCESSIBILITY.md                                      |
+| **Description**| VoiceOver reads folder name with note count           |
+| **Steps**      | 1. Enable VoiceOver                                   |
+|                | 2. Navigate to a folder with 3 notes                  |
+| **Expected**   | VoiceOver reads: "{folder name}, 3 notes"             |
+| **Priority**   | Should                                                |
+
+### TC-ACC2.2: Reduced Motion
+
+| Field          | Detail                                                |
+|----------------|-------------------------------------------------------|
+| **ID**         | TC-ACC2.2                                             |
+| **Requirement**| ACCESSIBILITY.md                                      |
+| **Description**| Animations are disabled when Reduce Motion is enabled |
+| **Steps**      | 1. Enable Reduce Motion in macOS Accessibility        |
+|                | 2. Pin a note, delete a note, toggle preview          |
+| **Expected**   | All transitions are instant (no animation)            |
+| **Priority**   | Should                                                |
+
+---
+
+## TC-EDGE1: Edge Case Tests
+
+### TC-EDGE1.1: Empty State Messages - Exact Text
+
+| Field          | Detail                                                |
+|----------------|-------------------------------------------------------|
+| **ID**         | TC-EDGE1.1                                            |
+| **Requirement**| STATE_MACHINE.md (Empty State Rules)                  |
+| **Description**| Empty state messages match exact spec text            |
+| **Steps**      | 1. Launch app with no data                            |
+| **Expected**   | "No Notes Yet" and "Press ⌘N to create your first note." |
+| **Priority**   | Must                                                  |
+
+### TC-EDGE1.2: Search Scopes to Selected Folder
+
+| Field          | Detail                                                |
+|----------------|-------------------------------------------------------|
+| **ID**         | TC-EDGE1.2                                            |
+| **Requirement**| STATE_MACHINE.md (ST-4)                               |
+| **Description**| Search respects folder selection scope                |
+| **Steps**      | 1. Create "Budget" in Folder A and Folder B           |
+|                | 2. Select Folder A                                    |
+|                | 3. Search "Budget"                                    |
+| **Expected**   | Only Folder A's "Budget" note appears                 |
+| **Priority**   | Should                                                |
+
+### TC-EDGE1.3: Search Clears on Folder Switch
+
+| Field          | Detail                                                |
+|----------------|-------------------------------------------------------|
+| **ID**         | TC-EDGE1.3                                            |
+| **Requirement**| STATE_MACHINE.md (ST-4)                               |
+| **Description**| Switching folders while search is active clears the search |
+| **Steps**      | 1. Search "test" while in Folder A                    |
+|                | 2. Click Folder B in sidebar                          |
+| **Expected**   | Search bar cleared, Folder B shows all its notes      |
+| **Priority**   | Must                                                  |
+
+### TC-EDGE1.4: Preview Mode Persists Across Note Switches
+
+| Field          | Detail                                                |
+|----------------|-------------------------------------------------------|
+| **ID**         | TC-EDGE1.4                                            |
+| **Requirement**| STATE_MACHINE.md (ST-5)                               |
+| **Description**| Preview mode stays active when selecting a different note |
+| **Steps**      | 1. Toggle preview mode on Note A                      |
+|                | 2. Click Note B in the list                           |
+| **Expected**   | Note B shown in preview mode                          |
+| **Priority**   | Must                                                  |
+
+### TC-EDGE1.5: Preview Mode Resets on New Note
+
+| Field          | Detail                                                |
+|----------------|-------------------------------------------------------|
+| **ID**         | TC-EDGE1.5                                            |
+| **Requirement**| STATE_MACHINE.md (ST-5)                               |
+| **Description**| Creating a new note always opens in edit mode         |
+| **Steps**      | 1. Toggle preview mode on                             |
+|                | 2. Press Cmd+N                                        |
+| **Expected**   | New note opens in edit mode (`isPreviewMode == false`) |
+| **Priority**   | Must                                                  |
+
+### TC-EDGE1.6: Debounce Flush on Note Switch
+
+| Field          | Detail                                                |
+|----------------|-------------------------------------------------------|
+| **ID**         | TC-EDGE1.6                                            |
+| **Requirement**| STATE_MACHINE.md (ST-6)                               |
+| **Description**| Switching notes immediately saves pending edits       |
+| **Steps**      | 1. Type in Note A (debounce starts)                   |
+|                | 2. Immediately click Note B (before 300ms)            |
+|                | 3. Click back to Note A                               |
+| **Expected**   | Note A has all typed content (debounce was flushed)   |
+| **Priority**   | Must                                                  |
+
+### TC-EDGE1.7: Save Failure Retry
+
+| Field          | Detail                                                |
+|----------------|-------------------------------------------------------|
+| **ID**         | TC-EDGE1.7                                            |
+| **Requirement**| STATE_MACHINE.md (ST-6), EDGE_CASES.md                |
+| **Description**| Save failure triggers retry and shows appropriate messages |
+| **Steps**      | 1. Simulate save failure                              |
+| **Expected**   | Banner: "Unable to save. Retrying..." → retry after 1s → if still fails: "Save failed. Your changes may not be persisted." |
+| **Priority**   | Should                                                |
+
+### TC-EDGE1.8: Word Count with Markdown
+
+| Field          | Detail                                                |
+|----------------|-------------------------------------------------------|
+| **ID**         | TC-EDGE1.8                                            |
+| **Requirement**| EDGE_CASES.md (Word Count Rules)                      |
+| **Description**| Markdown syntax tokens count as words                 |
+| **Steps**      | 1. Set body to `"## Heading"` → Word count            |
+|                | 2. Set body to `"**bold**"` → Word count              |
+| **Expected**   | `## Heading` = 2 words, `**bold**` = 1 word           |
+| **Priority**   | Should                                                |
+
+### TC-EDGE1.9: Delete Folder Switches to All Notes
+
+| Field          | Detail                                                |
+|----------------|-------------------------------------------------------|
+| **ID**         | TC-EDGE1.9                                            |
+| **Requirement**| STATE_MACHINE.md (ST-3)                               |
+| **Description**| Deleting the selected folder switches to All Notes view |
+| **Steps**      | 1. Select Folder A (with notes)                       |
+|                | 2. Delete Folder A                                    |
+| **Expected**   | `selectedFolder == nil`, All Notes view shown, first note selected |
+| **Priority**   | Must                                                  |
+
+### TC-EDGE1.10: Import File Into Specific Folder
+
+| Field          | Detail                                                |
+|----------------|-------------------------------------------------------|
+| **ID**         | TC-EDGE1.10                                           |
+| **Requirement**| CONTRACTS.md (importFile)                             |
+| **Description**| Importing a file while a folder is selected assigns it to that folder |
+| **Steps**      | 1. Select Folder "Work"                               |
+|                | 2. Import a `.md` file                                |
+| **Expected**   | Imported note has `folder == "Work"`                  |
+| **Priority**   | Should                                                |
+
+---
+
 ## Test Case Summary
 
 | Category       | Count | Must | Should | Could |
 |----------------|-------|------|--------|-------|
 | Models         | 21    | 12   | 5      | 4     |
 | ViewModels     | 20    | 10   | 9      | 1     |
-| Services       | 23    | 8    | 12     | 3     |
+| Services       | 30    | 10   | 17     | 3     |
 | UI Workflows   | 28    | 19   | 8      | 1     |
 | Integration    | 6     | 3    | 3      | 0     |
 | Performance    | 6     | 3    | 3      | 0     |
-| Accessibility  | 3     | 0    | 3      | 0     |
-| **Total**      | **107** | **55** | **43** | **9** |
+| Accessibility  | 5     | 0    | 5      | 0     |
+| Edge Cases     | 10    | 6    | 4      | 0     |
+| **Total**      | **126** | **63** | **54** | **9** |

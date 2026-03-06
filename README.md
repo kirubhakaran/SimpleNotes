@@ -42,6 +42,8 @@ SimpleNotes is a clean, fast, and distraction-free notes app for macOS. It focus
 | [CONTRACTS.md](CONTRACTS.md)              | API contracts, method signatures, error types |
 | [STATE_MACHINE.md](STATE_MACHINE.md)      | State transitions, behavioral rules, dialogs |
 | [EDGE_CASES.md](EDGE_CASES.md)            | Validation, sorting, concurrency, configuration |
+| [ACCESSIBILITY.md](ACCESSIBILITY.md)      | VoiceOver labels, focus order, Dynamic Type, Reduced Motion |
+| [LOCALIZATION.md](LOCALIZATION.md)          | i18n strategy, string catalog, date/number formatting |
 
 ### Testing
 
@@ -50,10 +52,10 @@ SimpleNotes is a clean, fast, and distraction-free notes app for macOS. It focus
 | [TEST_STRATEGY.md](TEST_STRATEGY.md)                  | Overall testing strategy and conventions |
 | [TEST_CASES.md](TEST_CASES.md)                        | Model layer unit tests (21 cases)        |
 | [TEST_CASES_VIEWMODEL.md](TEST_CASES_VIEWMODEL.md)    | ViewModel layer tests (20 cases)         |
-| [TEST_CASES_SERVICE.md](TEST_CASES_SERVICE.md)        | Service layer tests (23 cases)           |
-| [TEST_CASES_UI.md](TEST_CASES_UI.md)                  | UI, integration, performance & accessibility tests (43 cases) |
+| [TEST_CASES_SERVICE.md](TEST_CASES_SERVICE.md)        | Service layer tests (30 cases)           |
+| [TEST_CASES_UI.md](TEST_CASES_UI.md)                  | UI, integration, performance, accessibility & edge case tests (55 cases) |
 
-**Total: 107 test cases** (55 Must, 43 Should, 9 Could)
+**Total: 126 test cases** (63 Must, 54 Should, 9 Could)
 
 ## License
 

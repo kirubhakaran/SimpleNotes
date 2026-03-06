@@ -167,7 +167,7 @@ Unit tests for `SidebarViewModel` and `NoteEditorViewModel`.
 | **ID**         | TC-VM2.5                                              |
 | **Requirement**| FR-1.6                                                |
 | **Description**| Rapid edits are debounced before saving               |
-| **Steps**      | 1. Type 10 characters rapidly (within 200ms)          |
+| **Steps**      | 1. Type 10 characters rapidly (within 300ms)          |
 | **Expected**   | Save occurs once after debounce period, not 10 times  |
 | **Priority**   | Must                                                  |
 
@@ -192,7 +192,7 @@ Unit tests for `SidebarViewModel` and `NoteEditorViewModel`.
 | **Description**| After deleting, the next note in the list is selected |
 | **Steps**      | 1. Create notes A, B, C; select B                     |
 |                | 2. Delete B                                           |
-| **Expected**   | `selectedNote == C` (or A if C doesn't exist)         |
+| **Expected**   | `selectedNote == C` (next note fills gap at same index per STATE_MACHINE ST-2) |
 | **Priority**   | Should                                                |
 
 ### TC-VM2.8: Delete Last Note - Shows Empty State
