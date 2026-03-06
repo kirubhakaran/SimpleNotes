@@ -35,6 +35,18 @@ SimpleNotes is a clean, fast, and distraction-free notes app for macOS. It focus
 | [DATA_MODEL.md](DATA_MODEL.md)        | Data model and persistence details       |
 | [ROADMAP.md](ROADMAP.md)              | Development phases and milestones        |
 
+### Testing
+
+| Document                                              | Description                              |
+|-------------------------------------------------------|------------------------------------------|
+| [TEST_STRATEGY.md](TEST_STRATEGY.md)                  | Overall testing strategy and conventions |
+| [TEST_CASES.md](TEST_CASES.md)                        | Model layer unit tests (21 cases)        |
+| [TEST_CASES_VIEWMODEL.md](TEST_CASES_VIEWMODEL.md)    | ViewModel layer tests (20 cases)         |
+| [TEST_CASES_SERVICE.md](TEST_CASES_SERVICE.md)        | Service layer tests (23 cases)           |
+| [TEST_CASES_UI.md](TEST_CASES_UI.md)                  | UI, integration, performance & accessibility tests (43 cases) |
+
+**Total: 107 test cases** (55 Must, 43 Should, 9 Could)
+
 ## License
 
 MIT License
