@@ -69,34 +69,34 @@ SimpleNotes/
 
 Refer to these spec files before implementing:
 
-- `REQUIREMENTS.md` - What to build (MoSCoW prioritized)
-- `ARCHITECTURE.md` - How it's structured
-- `UI_DESIGN.md` - How it looks (layouts, colors, typography)
-- `DATA_MODEL.md` - Data schema and constraints
-- `ROADMAP.md` - Build order (Phase 1 first)
-- `CONTRACTS.md` - API method signatures, error types, return contracts
-- `STATE_MACHINE.md` - State transitions, post-action behavior, dialogs
-- `EDGE_CASES.md` - Validation rules, sorting tiebreakers, concurrency, constants
-- `ACCESSIBILITY.md` - VoiceOver labels, focus order, Dynamic Type, Reduced Motion
-- `LOCALIZATION.md` - String catalog, date/number formatting (all user-facing strings)
-- `TEST_STRATEGY.md` - Testing approach
-- `TEST_CASES*.md` - Specific test cases per layer
+- `specs/REQUIREMENTS.md` - What to build (MoSCoW prioritized)
+- `specs/ARCHITECTURE.md` - How it's structured
+- `specs/UI_DESIGN.md` - How it looks (layouts, colors, typography)
+- `specs/DATA_MODEL.md` - Data schema and constraints
+- `specs/ROADMAP.md` - Build order (Phase 1 first)
+- `specs/behavior/CONTRACTS.md` - API method signatures, error types, return contracts
+- `specs/behavior/STATE_MACHINE.md` - State transitions, post-action behavior, dialogs
+- `specs/behavior/EDGE_CASES.md` - Validation rules, sorting tiebreakers, concurrency, constants
+- `specs/accessibility/ACCESSIBILITY.md` - VoiceOver labels, focus order, Dynamic Type, Reduced Motion
+- `specs/accessibility/LOCALIZATION.md` - String catalog, date/number formatting (all user-facing strings)
+- `specs/testing/TEST_STRATEGY.md` - Testing approach
+- `specs/testing/TEST_CASES*.md` - Specific test cases per layer
 
 ## Critical Implementation Rules
 
-- Debounce interval is **300ms** (see `EDGE_CASES.md` for all constants)
-- Use the `SimpleNotesError` enum from `CONTRACTS.md` for all thrown errors
-- Follow post-delete selection logic exactly as defined in `STATE_MACHINE.md` ST-2
+- Debounce interval is **300ms** (see `specs/behavior/EDGE_CASES.md` for all constants)
+- Use the `SimpleNotesError` enum from `specs/behavior/CONTRACTS.md` for all thrown errors
+- Follow post-delete selection logic exactly as defined in `specs/behavior/STATE_MACHINE.md` ST-2
 - Search clears on folder switch; preview mode persists across note switches
 - Flush pending debounce saves before note switch or app termination
-- All sorting must include tiebreakers (see `EDGE_CASES.md` Sorting Rules)
-- Never hardcode user-facing strings; use `String(localized:)` per `LOCALIZATION.md`
-- All interactive elements must have accessibility labels per `ACCESSIBILITY.md`
+- All sorting must include tiebreakers (see `specs/behavior/EDGE_CASES.md` Sorting Rules)
+- Never hardcode user-facing strings; use `String(localized:)` per `specs/accessibility/LOCALIZATION.md`
+- All interactive elements must have accessibility labels per `specs/accessibility/ACCESSIBILITY.md`
 
 ## Development Workflow
 
-1. Follow the phases in `ROADMAP.md` sequentially
-2. Implement features per `REQUIREMENTS.md` priority (Must → Should → Could)
-3. Write tests alongside code per `TEST_CASES*.md`
-4. Match UI to specs in `UI_DESIGN.md`
-5. Respect data constraints in `DATA_MODEL.md`
+1. Follow the phases in `specs/ROADMAP.md` sequentially
+2. Implement features per `specs/REQUIREMENTS.md` priority (Must → Should → Could)
+3. Write tests alongside code per `specs/testing/TEST_CASES*.md`
+4. Match UI to specs in `specs/UI_DESIGN.md`
+5. Respect data constraints in `specs/DATA_MODEL.md`

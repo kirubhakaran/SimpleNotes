@@ -27,33 +27,33 @@ SimpleNotes is a clean, fast, and distraction-free notes app for macOS. It focus
 
 ## Documentation
 
-| Document                              | Description                              |
-|---------------------------------------|------------------------------------------|
-| [REQUIREMENTS.md](REQUIREMENTS.md)    | Functional and non-functional requirements |
-| [ARCHITECTURE.md](ARCHITECTURE.md)    | Technical architecture and design        |
-| [UI_DESIGN.md](UI_DESIGN.md)          | UI/UX specifications and layouts         |
-| [DATA_MODEL.md](DATA_MODEL.md)        | Data model and persistence details       |
-| [ROADMAP.md](ROADMAP.md)              | Development phases and milestones        |
+| Document                                                      | Description                              |
+|---------------------------------------------------------------|------------------------------------------|
+| [REQUIREMENTS.md](specs/REQUIREMENTS.md)                      | Functional and non-functional requirements |
+| [ARCHITECTURE.md](specs/ARCHITECTURE.md)                      | Technical architecture and design        |
+| [UI_DESIGN.md](specs/UI_DESIGN.md)                            | UI/UX specifications and layouts         |
+| [DATA_MODEL.md](specs/DATA_MODEL.md)                          | Data model and persistence details       |
+| [ROADMAP.md](specs/ROADMAP.md)                                | Development phases and milestones        |
 
 ### Contracts & Behavior
 
-| Document                                  | Description                              |
-|-------------------------------------------|------------------------------------------|
-| [CONTRACTS.md](CONTRACTS.md)              | API contracts, method signatures, error types |
-| [STATE_MACHINE.md](STATE_MACHINE.md)      | State transitions, behavioral rules, dialogs |
-| [EDGE_CASES.md](EDGE_CASES.md)            | Validation, sorting, concurrency, configuration |
-| [ACCESSIBILITY.md](ACCESSIBILITY.md)      | VoiceOver labels, focus order, Dynamic Type, Reduced Motion |
-| [LOCALIZATION.md](LOCALIZATION.md)          | i18n strategy, string catalog, date/number formatting |
+| Document                                                                  | Description                              |
+|---------------------------------------------------------------------------|------------------------------------------|
+| [CONTRACTS.md](specs/behavior/CONTRACTS.md)                               | API contracts, method signatures, error types |
+| [STATE_MACHINE.md](specs/behavior/STATE_MACHINE.md)                       | State transitions, behavioral rules, dialogs |
+| [EDGE_CASES.md](specs/behavior/EDGE_CASES.md)                             | Validation, sorting, concurrency, configuration |
+| [ACCESSIBILITY.md](specs/accessibility/ACCESSIBILITY.md)                  | VoiceOver labels, focus order, Dynamic Type, Reduced Motion |
+| [LOCALIZATION.md](specs/accessibility/LOCALIZATION.md)                    | i18n strategy, string catalog, date/number formatting |
 
 ### Testing
 
-| Document                                              | Description                              |
-|-------------------------------------------------------|------------------------------------------|
-| [TEST_STRATEGY.md](TEST_STRATEGY.md)                  | Overall testing strategy and conventions |
-| [TEST_CASES.md](TEST_CASES.md)                        | Model layer unit tests (21 cases)        |
-| [TEST_CASES_VIEWMODEL.md](TEST_CASES_VIEWMODEL.md)    | ViewModel layer tests (20 cases)         |
-| [TEST_CASES_SERVICE.md](TEST_CASES_SERVICE.md)        | Service layer tests (30 cases)           |
-| [TEST_CASES_UI.md](TEST_CASES_UI.md)                  | UI, integration, performance, accessibility & edge case tests (55 cases) |
+| Document                                                                          | Description                              |
+|-----------------------------------------------------------------------------------|------------------------------------------|
+| [TEST_STRATEGY.md](specs/testing/TEST_STRATEGY.md)                                | Overall testing strategy and conventions |
+| [TEST_CASES.md](specs/testing/TEST_CASES.md)                                      | Model layer unit tests (21 cases)        |
+| [TEST_CASES_VIEWMODEL.md](specs/testing/TEST_CASES_VIEWMODEL.md)                  | ViewModel layer tests (20 cases)         |
+| [TEST_CASES_SERVICE.md](specs/testing/TEST_CASES_SERVICE.md)                      | Service layer tests (30 cases)           |
+| [TEST_CASES_UI.md](specs/testing/TEST_CASES_UI.md)                                | UI, integration, performance, accessibility & edge case tests (55 cases) |
 
 **Total: 126 test cases** (63 Must, 54 Should, 9 Could)
 
