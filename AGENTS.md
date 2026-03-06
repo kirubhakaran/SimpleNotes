@@ -66,11 +66,23 @@ Read these before implementing:
 - `UI_DESIGN.md` — three-column layout, colors, typography, menus
 - `DATA_MODEL.md` — Note/Folder/Tag schema, relationships, constraints
 - `ROADMAP.md` — 6 development phases (build Phase 1 first)
+- `CONTRACTS.md` — API method signatures, error types, return contracts
+- `STATE_MACHINE.md` — state transitions, post-action behavior, confirmation dialogs
+- `EDGE_CASES.md` — validation rules, sorting tiebreakers, concurrency model, constants
 - `TEST_STRATEGY.md` — test pyramid, conventions, coverage targets
 - `TEST_CASES.md` — model layer tests (21 cases)
 - `TEST_CASES_VIEWMODEL.md` — ViewModel tests (20 cases)
 - `TEST_CASES_SERVICE.md` — service layer tests (23 cases)
 - `TEST_CASES_UI.md` — UI, integration, performance tests (43 cases)
+
+## Critical Rules
+
+- Debounce interval is **300ms** (all constants in `EDGE_CASES.md`)
+- Use `SimpleNotesError` enum from `CONTRACTS.md` for all thrown errors
+- Follow post-delete selection logic in `STATE_MACHINE.md` ST-2
+- Search clears on folder switch; preview mode persists across note switches
+- Flush pending debounce saves before note switch or app termination
+- All sorting must include tiebreakers (see `EDGE_CASES.md` Sorting Rules)
 
 ## Workflow
 

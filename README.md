@@ -35,6 +35,14 @@ SimpleNotes is a clean, fast, and distraction-free notes app for macOS. It focus
 | [DATA_MODEL.md](DATA_MODEL.md)        | Data model and persistence details       |
 | [ROADMAP.md](ROADMAP.md)              | Development phases and milestones        |
 
+### Contracts & Behavior
+
+| Document                                  | Description                              |
+|-------------------------------------------|------------------------------------------|
+| [CONTRACTS.md](CONTRACTS.md)              | API contracts, method signatures, error types |
+| [STATE_MACHINE.md](STATE_MACHINE.md)      | State transitions, behavioral rules, dialogs |
+| [EDGE_CASES.md](EDGE_CASES.md)            | Validation, sorting, concurrency, configuration |
+
 ### Testing
 
 | Document                                              | Description                              |
