@@ -88,6 +88,30 @@ Read these before implementing:
 - Never hardcode user-facing strings; use `String(localized:)` per `specs/accessibility/LOCALIZATION.md`
 - All interactive elements must have accessibility labels per `specs/accessibility/ACCESSIBILITY.md`
 
+## ⚠️ Mandatory: Spec-Code Consistency
+
+**Read `specs/SPEC_COMPLIANCE.md` before every check-in.** Non-negotiable.
+
+- **Specs are the single source of truth.** If spec and code disagree, spec wins.
+- **NEVER commit code that contradicts any spec file.**
+- **If you must deviate from spec, update the spec FIRST**, then update code.
+- Every code file must reference its spec via `/// Reference:` comments.
+
+### Check-in Verification (10-Point Checklist)
+
+Before every commit, verify ALL:
+
+1. Method signatures match `specs/behavior/CONTRACTS.md`
+2. User-facing strings match `specs/accessibility/LOCALIZATION.md`
+3. State transitions match `specs/behavior/STATE_MACHINE.md`
+4. Constants match `specs/behavior/EDGE_CASES.md`
+5. Sort orders include full tiebreaker chain per `specs/behavior/EDGE_CASES.md`
+6. Accessibility labels match `specs/accessibility/ACCESSIBILITY.md`
+7. Validation rules match `specs/behavior/EDGE_CASES.md`
+8. Error types/messages match `specs/behavior/CONTRACTS.md` + `specs/accessibility/LOCALIZATION.md`
+9. Build succeeds with **zero warnings**
+10. All existing tests pass
+
 ## Workflow
 
 1. Follow phases in `specs/ROADMAP.md` sequentially
@@ -95,3 +119,4 @@ Read these before implementing:
 3. Write tests alongside code per `specs/testing/TEST_CASES*.md`
 4. Match UI to `specs/UI_DESIGN.md` specs
 5. Respect data constraints in `specs/DATA_MODEL.md`
+6. **Run the 10-point check-in checklist before every commit** per `specs/SPEC_COMPLIANCE.md`

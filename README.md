@@ -44,6 +44,7 @@ SimpleNotes is a clean, fast, and distraction-free notes app for macOS. It focus
 | [EDGE_CASES.md](specs/behavior/EDGE_CASES.md)                             | Validation, sorting, concurrency, configuration |
 | [ACCESSIBILITY.md](specs/accessibility/ACCESSIBILITY.md)                  | VoiceOver labels, focus order, Dynamic Type, Reduced Motion |
 | [LOCALIZATION.md](specs/accessibility/LOCALIZATION.md)                    | i18n strategy, string catalog, date/number formatting |
+| [SPEC_COMPLIANCE.md](specs/SPEC_COMPLIANCE.md)                            | **Mandatory** spec-code consistency rules, check-in checklist |
 
 ### Testing
 

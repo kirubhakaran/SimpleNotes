@@ -93,6 +93,30 @@ Refer to these spec files before implementing:
 - Never hardcode user-facing strings; use `String(localized:)` per `specs/accessibility/LOCALIZATION.md`
 - All interactive elements must have accessibility labels per `specs/accessibility/ACCESSIBILITY.md`
 
+## ⚠️ Mandatory: Spec-Code Consistency
+
+**Read `specs/SPEC_COMPLIANCE.md` before every check-in.** This is non-negotiable.
+
+- **Specs are the single source of truth.** If spec and code disagree, the spec wins.
+- **NEVER commit code that contradicts any spec file.**
+- **If you must deviate from spec, update the spec FIRST**, then update code.
+- Every code file must reference its spec via `/// Reference:` comments.
+
+### Check-in Verification (10-Point Checklist)
+
+Before every commit, verify ALL of the following:
+
+1. All method signatures match `specs/behavior/CONTRACTS.md`
+2. All user-facing strings match `specs/accessibility/LOCALIZATION.md`
+3. All state transitions match `specs/behavior/STATE_MACHINE.md`
+4. All constants match `specs/behavior/EDGE_CASES.md`
+5. All sort orders include full tiebreaker chain per `specs/behavior/EDGE_CASES.md`
+6. All accessibility labels match `specs/accessibility/ACCESSIBILITY.md`
+7. All validation rules match `specs/behavior/EDGE_CASES.md`
+8. All error types/messages match `specs/behavior/CONTRACTS.md` + `specs/accessibility/LOCALIZATION.md`
+9. Build succeeds with **zero warnings** (`xcodebuild build`)
+10. All existing tests pass (`xcodebuild test`)
+
 ## Development Workflow
 
 1. Follow the phases in `specs/ROADMAP.md` sequentially
@@ -100,3 +124,4 @@ Refer to these spec files before implementing:
 3. Write tests alongside code per `specs/testing/TEST_CASES*.md`
 4. Match UI to specs in `specs/UI_DESIGN.md`
 5. Respect data constraints in `specs/DATA_MODEL.md`
+6. **Run the 10-point check-in checklist before every commit** per `specs/SPEC_COMPLIANCE.md`

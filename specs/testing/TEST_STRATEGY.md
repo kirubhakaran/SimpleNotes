@@ -123,6 +123,41 @@ UI Tests ─── Fail? → Warn (flaky tolerance)
 Coverage Report → Enforce minimums
 ```
 
+## Spec Compliance Testing
+
+> **Every test must validate spec-defined behavior.** See `specs/SPEC_COMPLIANCE.md` for full rules.
+
+### Traceability Requirement
+
+Every test method must reference its spec source:
+
+```swift
+/// Spec: specs/behavior/CONTRACTS.md — NoteService.create
+/// Spec: specs/behavior/STATE_MACHINE.md — ST-2: Post-Delete Selection
+func test_create_defaultValues_returnsNoteWithDefaults() { ... }
+```
+
+### What Tests Must Verify
+
+| Spec Document | Test Must Check |
+|---------------|----------------|
+| `CONTRACTS.md` | Method signatures, return values, error cases, behavior tables |
+| `STATE_MACHINE.md` | State transitions, post-delete selection, preview mode persistence |
+| `EDGE_CASES.md` | Boundary values, truncation rules, sort tiebreakers, threading |
+| `LOCALIZATION.md` | All user-facing strings match spec keys exactly |
+| `ACCESSIBILITY.md` | VoiceOver labels, hints, and roles present and correct |
+| `DATA_MODEL.md` | Field types, defaults, relationship delete rules |
+
+### Spec Compliance CI Gate
+
+In addition to standard test gates, the CI pipeline must verify:
+
+1. **Zero spec violations** — all test assertions validate spec-defined behavior
+2. **Zero hardcoded strings** — all user-facing text uses `String(localized:)`
+3. **Zero untraced tests** — every test method has a `/// Spec:` comment
+
+---
+
 ## Test Documents
 
 | Document                                              | Contents                            |
